@@ -1,12 +1,12 @@
 const BASE = <>
-    <div style={{
+    <div id="base_top_right" style={{
         position: 'absolute',
         left: '250px',
         width: '10px',
         height: '50px',
         backgroundColor: 'black',
     }}/>
-    <div style={{
+    <div id="base_top" style={{
         position: 'relative',
         top: 0,
         left: '100px',
@@ -25,7 +25,7 @@ const BASE = <>
     <div style={{
         position: 'relative',
         bottom: 0,
-        width: '400px',
+        width: '200px',
         height: '10px',
         backgroundColor: 'black',
     }}/>
@@ -87,21 +87,19 @@ const LEFT_LEG = <div style={{
     transformOrigin: 'right top',
     backgroundColor: 'black',
 }}/>
+const BODY_PART = [BASE, HEAD, BODY, RIGHT_ARM, LEFT_ARM, RIGHT_LEG, LEFT_LEG]
 
-
-function Hangman() {
-    return (
+export default function Hangman() {
+    return(
         <>
             {BASE}
-            {HEAD}
-            {BODY}
-            {RIGHT_ARM}
-            {LEFT_ARM}
-            {RIGHT_LEG}
+            {BODY} 
+            {HEAD} 
+            {BODY} 
+            {RIGHT_ARM} 
+            {LEFT_ARM} 
+            {RIGHT_LEG} 
             {LEFT_LEG}
         </>
-        
     );
 }
-
-export default Hangman;
