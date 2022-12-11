@@ -56,15 +56,14 @@ const LEFT_LEG = <div style={{
     backgroundColor: 'black',
 }}/>
 
-export default function Hangman() {
+const BODY_PART = [HEAD, BODY, RIGHT_ARM, LEFT_ARM, RIGHT_LEG, LEFT_LEG]
+
+export default function Hangman({ numberOfError }) {
     return(
         <div style={{ position: 'relative'}}>
-        {HEAD}
-        {BODY}
-        {RIGHT_ARM}
-        {LEFT_ARM}
-        {RIGHT_LEG}
-        {LEFT_LEG}
+
+        {BODY_PART.slice(0, numberOfError)}
+        
         <div style={{
             position: 'absolute',
             top: 0,

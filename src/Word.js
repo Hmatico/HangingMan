@@ -1,6 +1,4 @@
-export default function Word() {
-    const word = "test"
-    const guessedLetters = ["t", "e"]
+export default function Word({ word, guesses, isLoser }) {
     return (
         <div style={{
             display: 'flex',
@@ -11,9 +9,10 @@ export default function Word() {
         }}>
         {word.split('').map((letter, index) => (
             <span style={{ borderBottom: '.1em solid black'}} key={index}>
-            <span style={{ visibility: guessedLetters.includes(letter)
-            ? 'visible'
-        : 'hidden'}}>{letter}</span>
+                <span style={{ 
+                    visibility: isLoser || guesses.includes(letter)? 'visible': 'hidden',
+                    color: isLoser&&!guesses.includes(letter)?'red':''
+                }}>{letter}</span>
         </span>
         ))
         }
