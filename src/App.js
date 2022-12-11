@@ -11,11 +11,20 @@ function App() {
   })
   const [guessedLetters, setGuessedLetters] = useState([])
   return (
-    <>
-    <Hangman/>
-    <Word word={wordToGuess} />
-    <KeyBoard />
-    </>
+    <div style={{
+      minWidth: '500px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '1rem',
+      alignItems: 'center'
+    }}>
+      <h1>Win / Lose</h1>
+      <Hangman/>
+      <Word />
+      <div style={{ alignSelf: 'stretch'}}>
+        <KeyBoard />
+      </div>
+    </div>
   );
 }
 
