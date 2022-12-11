@@ -10,6 +10,8 @@ function App() {
   }
   const [wordToGuess, setWordToGuess] = useState(getNewWord())
   const [guessedLetters, setGuessedLetters] = useState([])
+  const [winScore, setWinScore] = useState(0)
+  const [totalGame, setTotalGame] = useState(0)
   const wrongGuesses = guessedLetters.filter(
     letter => !wordToGuess.includes(letter)
   )
@@ -18,9 +20,8 @@ function App() {
   const isWinner = wordToGuess.split("").every(letter => guessedLetters.includes(letter))
 
   const addGuessedLetter = useCallback((key) => {
-    if (!guessedLetters.includes(key) && !isWinner && !isLoser) {
-      setGuessedLetters(currentLetters => [...currentLetters, key])
-    }
+    if (guessedLetters.includes(key) || isWinner || isLoser) return 
+    setGuessedLetters(currentLetters => [...currentLetters, key])
   }, [guessedLetters, isWinner, isLoser])
   
   useEffect(() => {
@@ -41,6 +42,8 @@ function App() {
       const key = e.key
       if (key !== "Enter") return
       e.preventDefault()
+      setWinScore(score => score+isWinner?1:0)
+      setTotalGame(numberOfGame => numberOfGame+1)
       setWordToGuess(getNewWord)
       setGuessedLetters([])
     }
@@ -48,7 +51,7 @@ function App() {
     return () => {
       document.removeEventListener("keypress", handler)
     }
-  }, [])
+  }, [isWinner])
   
   return (
     <div style={{
@@ -58,10 +61,11 @@ function App() {
       gap: '1rem',
       alignItems: 'center'
     }}>
-      <h1>
+      <h3>Correct guesses: {winScore} | incorrect guesses: {totalGame-winScore}  | {winScore/(totalGame>0?totalGame:1)*100}%</h3>
+      <h2>
         {isWinner && "Winner! - Refresh to try again!"}
         {isLoser && "Nice try - Refresh to try again!"}
-      </h1>
+      </h2>
       <Hangman numberOfError = {wrongGuesses.length}/>
       <Word word={wordToGuess} guesses={guessedLetters} isLoser={isLoser}/>
       <div style={{ alignSelf: 'stretch'}}>
